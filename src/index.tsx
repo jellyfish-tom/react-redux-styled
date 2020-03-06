@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import * as serviceWorker from './serviceWorker';
 import configureStore from './store';
 import { AppNavbar } from './components/navbar';
 import Home from './pages/home';
@@ -32,5 +31,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-
-serviceWorker.unregister();

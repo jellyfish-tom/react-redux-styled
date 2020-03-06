@@ -14,10 +14,10 @@ export const genericGet = (domain: string) => {
   }) => {
     begin();
 
-    axios
+    return axios
       .get(`${baseURL}/${domain}`)
       .then(httpResponse => success(httpResponse.data))
-      .catch(httpError => error(httpError));
+      .catch(error);
   };
 };
 
@@ -35,9 +35,9 @@ export const genericPost = (domain: string) => {
   }) => {
     begin();
 
-    axios
+    return axios
       .post(`${baseURL}/${domain}`, payload)
       .then(httpResponse => success(httpResponse.data))
-      .catch(httpError => error(httpError));
+      .catch(error);
   };
 };

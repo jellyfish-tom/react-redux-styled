@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import * as postsAPI from '../api/posts';
@@ -17,7 +17,7 @@ function Posts(props: {
   fetchPostsSuccess: any;
   fetchPostsError: any;
 }) {
-  const posts = useSelector((state: StoreState) => state.posts);
+  const data = useSelector((state: StoreState) => state.posts.data); // TODO: active post dekonstrukcja
 
   useEffect(() => {
     postsAPI.getPosts({
@@ -29,7 +29,7 @@ function Posts(props: {
 
   return (
     <div className="posts-list">
-      <PostsList posts={posts.data} />
+      <PostsList posts={data} />
     </div>
   );
 }

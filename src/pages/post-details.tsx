@@ -8,7 +8,7 @@ import { Post } from '../reducers/models';
 
 function PostDetails() {
   const post: Post | null = useSelector(
-    (state: StoreState) => state.posts.activePost,
+    (state: StoreState) => state.posts.activePost, // TODO: active post dekonstrukcja
   );
 
   return (
