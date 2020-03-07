@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
-import { Post } from './models';
+import { AxiosError } from 'axios';
+
+import { Post, NullablePost } from './models';
 import postReducer from './post-reducer';
 
 export default combineReducers({
@@ -7,5 +9,10 @@ export default combineReducers({
 });
 
 export interface StoreState {
-  posts: { data: Post[]; error: any; loading: boolean, activePost: Post | null }; // TODO: not yet sure about data and error shapes
+  posts: {
+    data: Post[];
+    error: AxiosError;
+    loading: boolean;
+    activePost: NullablePost;
+  }; // TODO: not yet sure about data and error shapes
 }

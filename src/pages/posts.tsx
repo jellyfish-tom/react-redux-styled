@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useSelector } from 'react-redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import * as postsAPI from '../api/posts';
 import {
   fetchPostsPending,
   fetchPostsSuccess,
   fetchPostsError,
+  FetchPostsPendingType,
+  FetchPostsSuccessType,
+  FetchPostsErrorType,
 } from '../actions/post-action';
 import { StoreState } from '../reducers/root-reducer';
 import PostsList from '../components/posts/posts-list';
 
 function Posts(props: {
-  fetchPostsPending: any;
-  fetchPostsSuccess: any;
-  fetchPostsError: any;
+  fetchPostsPending: FetchPostsPendingType;
+  fetchPostsSuccess: FetchPostsSuccessType;
+  fetchPostsError: FetchPostsErrorType;
 }) {
   const data = useSelector((state: StoreState) => state.posts.data); // TODO: active post dekonstrukcja
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FetchPostsPendingType, FetchPostsSuccessType, FetchPostsErrorType } from '../actions/post-action';
 
 const baseURL = 'https://jsonplaceholder.typicode.com';
 
@@ -8,9 +9,9 @@ export const genericGet = (domain: string) => {
     success,
     error,
   }: {
-    begin: any;
-    success: any;
-    error: any;
+    begin: FetchPostsPendingType;
+    success: FetchPostsSuccessType;
+    error: FetchPostsErrorType;
   }) => {
     begin();
 
@@ -28,10 +29,10 @@ export const genericPost = (domain: string) => {
     success,
     error,
   }: {
-    payload: any;
-    begin: any;
-    success: any;
-    error: any;
+    payload: object;
+    begin: FetchPostsPendingType;
+    success: FetchPostsSuccessType;
+    error: FetchPostsErrorType;
   }) => {
     begin();
 

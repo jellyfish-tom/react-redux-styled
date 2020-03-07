@@ -9,3 +9,5 @@ export interface Post {
   title: string;
   body: string;
 }
+
+export type NullablePost = Post | null;

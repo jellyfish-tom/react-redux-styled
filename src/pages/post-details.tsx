@@ -4,10 +4,10 @@ import React from 'react';
 
 // import * as postsAPI from '../api/posts';
 import { StoreState } from '../reducers/root-reducer';
-import { Post } from '../reducers/models';
+import { NullablePost } from '../reducers/models';
 
 function PostDetails() {
-  const post: Post | null = useSelector(
+  const post: NullablePost = useSelector(
     (state: StoreState) => state.posts.activePost, // TODO: active post dekonstrukcja
   );
 
