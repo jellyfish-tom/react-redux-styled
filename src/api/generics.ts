@@ -35,12 +35,14 @@ export const genericPost = (domain: string) => {
     success: FetchPostsSuccessType;
     error: FetchErrorType;
   }) => {
-    begin();
+    if (begin) {
+      begin();
+    }
 
     return axios
       .post(`${baseURL}/${domain}`, payload)
-      .then(httpResponse => success(httpResponse.data))
-      .catch(error);
+      .then(httpResponse => success && success(httpResponse.data))
+      .catch(axiosError => error && error(axiosError));
   };
 };
 
@@ -62,6 +64,33 @@ export const genericDelete = (domain: string) => {
 
     return axios
       .delete(`${baseURL}/${domain}/${itemId}`)
+      .then(httpResponse => success && success(httpResponse.data))
+      .catch(axiosError => error && error(axiosError));
+  };
+};
+
+export const genericUpdate = (domain: string) => {
+  return ({
+    itemId,
+    payload,
+    begin,
+    success,
+    error,
+  }: {
+    itemId: string | number;
+    payload: object;
+    begin?: Function;
+    success?: Function;
+    error?: FetchErrorType;
+  }) => {
+    if (begin) {
+      begin();
+    }
+
+    return axios
+      .patch(`${baseURL}/${domain}/${itemId}`, {
+        data: payload,
+      })
       .then(httpResponse => success && success(httpResponse.data))
       .catch(axiosError => error && error(axiosError));
   };

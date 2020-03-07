@@ -16,15 +16,14 @@ function PostsListItem(props: { post: Post; setActivePost: any }) {
     history.push(Routes.postDetails(post.id));
   };
 
-  const removeElement = (e: any) => {
+  const removeElement = () => {
     postsAPI.deletePost({ itemId: post.id });
-
-    e.stopPropagation();
   };
 
   return (
-    <li className="posts-list" onClick={moveToDetails}>
+    <li className="posts-list">
       <span>{post.title}</span>
+      <button onClick={moveToDetails}>DETAILS</button>
       <button onClick={removeElement}>REMOVE</button>
     </li>
   );

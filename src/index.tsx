@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 
 import configureStore from './store';
 import { AppNavbar } from './components/navbar';
-import Home from './pages/home';
-import Posts from './pages/posts';
-import PostDetails from './pages/post-details';
+import HomePage from './pages/home-page';
+import PostsPage from './pages/posts-page';
+import PostDetailsPage from './pages/post-details-page';
 import Routes from './api/routes';
 
 ReactDOM.render(
@@ -16,13 +16,13 @@ ReactDOM.render(
       <AppNavbar />
       <Switch>
         <Route exact path={Routes.home}>
-          <Home />
+          <HomePage />
         </Route>
         <Route exact path={Routes.posts}>
-          <Posts />
+          <PostsPage />
         </Route>
         <Route exact path={Routes.postDetails()}>
-          <PostDetails />
+          <PostDetailsPage />
         </Route>
       </Switch>
     </BrowserRouter>

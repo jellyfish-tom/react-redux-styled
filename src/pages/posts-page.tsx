@@ -13,7 +13,7 @@ import { FetchErrorType } from '../actions/generics';
 import { StoreState } from '../reducers/root-reducer';
 import PostsList from '../components/posts/posts-list';
 
-function Posts(props: {
+function PostsPage(props: {
   fetchPostsPending: FetchPostsPendingType;
   fetchPostsSuccess: FetchPostsSuccessType;
   fetchPostsError: FetchErrorType;
@@ -39,4 +39,4 @@ export default connect(null, {
   fetchPostsPending,
   fetchPostsSuccess,
   fetchPostsError,
-})(Posts);
+})(PostsPage);

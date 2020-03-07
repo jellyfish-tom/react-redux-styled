@@ -7,10 +7,12 @@ export const FETCH_POSTS_PENDING = 'FETCH_POSTS_PENDING';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const FETCH_POSTS_ERROR = 'FETCH_POSTS_ERROR';
 export const SET_ACTIVE_POST = 'SET_ACTIVE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
 export type FetchPostsPendingType = () => { type: string };
 export type FetchPostsSuccessType = (posts: Post[]) => { type: string; payload: Post[] };
 export type SetActivePostType = (post: NullablePost) => { type: string; payload: Post };
+export type UpdatePostType = (post: Post) => { type: string; payload: Post };
 
 export const fetchPostsPending: FetchPostsPendingType = () => ({
   type: FETCH_POSTS_PENDING,
@@ -28,5 +30,10 @@ export const fetchPostsError: FetchErrorType = (error: AxiosError) => ({
 
 export const setActivePost = (post: NullablePost) => ({
   type: SET_ACTIVE_POST,
+  payload: post,
+});
+
+export const updatePost = (post: Post) => ({
+  type: UPDATE_POST,
   payload: post,
 });
