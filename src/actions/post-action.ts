@@ -1,5 +1,7 @@
-import { Post, NullablePost } from '../reducers/models';
 import { AxiosError } from 'axios';
+
+import { Post, NullablePost } from '../reducers/models';
+import { FetchErrorType } from './generics';
 
 export const FETCH_POSTS_PENDING = 'FETCH_POSTS_PENDING';
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
@@ -8,7 +10,6 @@ export const SET_ACTIVE_POST = 'SET_ACTIVE_POST';
 
 export type FetchPostsPendingType = () => { type: string };
 export type FetchPostsSuccessType = (posts: Post[]) => { type: string; payload: Post[] };
-export type FetchPostsErrorType = (error: AxiosError) => { type: string; payload: AxiosError };
 export type SetActivePostType = (post: NullablePost) => { type: string; payload: Post };
 
 export const fetchPostsPending: FetchPostsPendingType = () => ({
@@ -20,7 +21,7 @@ export const fetchPostsSuccess: FetchPostsSuccessType = (posts: Post[]) => ({
   payload: posts,
 });
 
-export const fetchPostsError: FetchPostsErrorType = (error: AxiosError) => ({
+export const fetchPostsError: FetchErrorType = (error: AxiosError) => ({
   type: FETCH_POSTS_ERROR,
   payload: error,
 });

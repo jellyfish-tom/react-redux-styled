@@ -8,15 +8,15 @@ import {
   fetchPostsError,
   FetchPostsPendingType,
   FetchPostsSuccessType,
-  FetchPostsErrorType,
 } from '../actions/post-action';
+import { FetchErrorType } from '../actions/generics';
 import { StoreState } from '../reducers/root-reducer';
 import PostsList from '../components/posts/posts-list';
 
 function Posts(props: {
   fetchPostsPending: FetchPostsPendingType;
   fetchPostsSuccess: FetchPostsSuccessType;
-  fetchPostsError: FetchPostsErrorType;
+  fetchPostsError: FetchErrorType;
 }) {
   const data = useSelector((state: StoreState) => state.posts.data); // TODO: active post dekonstrukcja
 

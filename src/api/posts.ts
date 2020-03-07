@@ -1,4 +1,7 @@
-import { genericGet, genericPost } from './generics';
+import { genericGet, genericDelete, genericPost } from './generics';
 
-export const getPosts = genericGet('posts');
-export const createPost = genericPost('posts');
+const domain = 'posts';
+
+export const getPosts = genericGet(domain);
+export const createPost = genericPost(domain);
+export const deletePost = genericDelete(domain);

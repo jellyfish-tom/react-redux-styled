@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import * as postsAPI from '../../api/posts';
 import { Post } from '../../reducers/models';
 import Routes from '../../api/routes';
 import { setActivePost } from '../../actions/post-action';
@@ -15,9 +16,16 @@ function PostsListItem(props: { post: Post; setActivePost: any }) {
     history.push(Routes.postDetails(post.id));
   };
 
+  const removeElement = (e: any) => {
+    postsAPI.deletePost({ itemId: post.id });
+
+    e.stopPropagation();
+  };
+
   return (
     <li className="posts-list" onClick={moveToDetails}>
       <span>{post.title}</span>
+      <button onClick={removeElement}>REMOVE</button>
     </li>
   );
 }
