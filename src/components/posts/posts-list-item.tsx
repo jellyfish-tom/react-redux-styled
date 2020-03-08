@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import * as postsAPI from '../../api/posts';
 import { Post } from '../../reducers/models';
 import Routes from '../../api/routes';
-import { setActivePost } from '../../actions/post-action';
+import { setActivePost, SetActivePostType } from '../../actions/post-actions';
 
-function PostsListItem(props: { post: Post; setActivePost: any }) {
+function PostsListItem(props: { post: Post; setActivePost: SetActivePostType }) {
   const { post, setActivePost } = props;
   const history = useHistory();
 
@@ -17,7 +17,9 @@ function PostsListItem(props: { post: Post; setActivePost: any }) {
   };
 
   const removeElement = () => {
-    postsAPI.deletePost({ itemId: post.id });
+    if (post.id) {
+      postsAPI.deletePost({ itemId: post.id });
+    }
   };
 
   return (

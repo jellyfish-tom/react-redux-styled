@@ -5,9 +5,7 @@ export interface Action {
 
 export interface Post {
   userId: number;
-  id: number;
+  id?: number;
   title: string;
   body: string;
 }
-
-export type NullablePost = Post | null;

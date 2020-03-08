@@ -1,23 +1,67 @@
 import { connect, useSelector } from 'react-redux';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { FireworkSpinner } from 'react-spinners-kit';
 
+import { ErrorType } from '../actions/generics';
 import { StoreState } from '../reducers/root-reducer';
+import { PostState } from '../reducers/post-reducer';
 import { Post } from '../reducers/models';
-import { updatePost, UpdatePostType } from '../actions/post-action';
-import PostDetails from '../components/posts/post-details';
-// import PostNew from '../components/posts/post-new';
+import {
+  onPostActionError,
+  onPostActionPending,
+  OnPostActionPendingType,
+  setActivePost,
+  updatePost,
+  UpdatePostType,
+} from '../actions/post-actions';
+import * as postsAPI from '../api/posts';
+import Routes from '../api/routes';
 
-function PostDetailsPage(props: { updatePost: UpdatePostType }) {
-  const post: Post = useSelector((state: StoreState) => state.posts.activePost as Post);
+function PostDetailsPage(props: {
+  updatePost: UpdatePostType;
+  onPostActionError: ErrorType;
+  onPostActionPending: OnPostActionPendingType;
+}) {
+  const { data, loading } = useSelector((state: StoreState) => state.activePost as PostState);
+  const history = useHistory();
 
-  const { updatePost } = props;
+  const { updatePost, onPostActionPending, onPostActionError } = props;
 
-  const onPostPropertyUpdate = (post: Post) => {
-    updatePost(post);
+  const onTitleChange = (event: any) => {
+    updatePost({ ...data, title: event.target.value });
   };
 
-  // return post ? <PostDetails /> : <PostNew />;
-  return post && <PostDetails post={post} onPostPropertyUpdate={onPostPropertyUpdate} />;
+  const onBodyChange = (event: any) => {
+    updatePost({ ...data, body: event.target.value });
+  };
+
+  const saveChanges = () => {
+    if (data.id) {
+      postsAPI.updatePost({ itemId: data.id, payload: data });
+      history.push(Routes.posts);
+    } else {
+      postsAPI.createPost({
+        payload: data,
+        begin: onPostActionPending,
+        success: () => {
+          setActivePost({} as Post);
+          history.push(Routes.posts);
+        },
+        error: onPostActionError,
+      });
+    }
+  };
+
+  return loading ? (
+    <FireworkSpinner size={30} color="#686769" loading={loading} />
+  ) : (
+    <div className="post-details">
+      <input onChange={onTitleChange} value={data.title || ''} />
+      <input onChange={onBodyChange} value={data.body || ''} />
+      <button onClick={saveChanges}>{data.id ? 'UPDATE' : 'CREATE'}</button>
+    </div>
+  );
 }
 
-export default connect(null, { updatePost })(PostDetailsPage);
+export default connect(null, { updatePost, onPostActionPending, onPostActionError })(PostDetailsPage);
