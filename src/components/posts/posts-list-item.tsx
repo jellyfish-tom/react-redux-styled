@@ -6,6 +6,9 @@ import * as postsAPI from '../../api/posts';
 import { Post } from '../../reducers/models';
 import Routes from '../../api/routes';
 import { setActivePost, SetActivePostType } from '../../actions/post-actions';
+import StyledButton from '../../components/button';
+
+import colors from '../colors';
 
 function PostsListItem(props: { post: Post; setActivePost: SetActivePostType }) {
   const { post, setActivePost } = props;
@@ -25,8 +28,12 @@ function PostsListItem(props: { post: Post; setActivePost: SetActivePostType }) 
   return (
     <li className="posts-list">
       <span>{post.title}</span>
-      <button onClick={moveToDetails}>DETAILS</button>
-      <button onClick={removeElement}>REMOVE</button>
+      <StyledButton color={colors.yellow} clickHandler={moveToDetails}>
+        DETAILS
+      </StyledButton>
+      <StyledButton color={colors.red} clickHandler={removeElement}>
+        REMOVE
+      </StyledButton>
     </li>
   );
 }

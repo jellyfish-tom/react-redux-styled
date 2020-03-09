@@ -41,9 +41,8 @@ function PostsPage(props: {
   };
 
   return (
-    <div className="posts-list">
-      <button onClick={createNewPost}>CREATE POST</button>
-      <PostsList posts={data} />
+    <div className="page posts-list">
+      <PostsList posts={data} onCreateNewPostClick={createNewPost} />
     </div>
   );
 }

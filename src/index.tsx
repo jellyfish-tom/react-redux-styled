@@ -9,10 +9,23 @@ import HomePage from './pages/home-page';
 import PostsPage from './pages/posts-page';
 import PostDetailsPage from './pages/post-details-page';
 import Routes from './api/routes';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    padding: 20px;
+    margin: 0;
+  }
+
+  .page {
+    padding: 20px 0;
+  }
+`;
 
 ReactDOM.render(
   <Provider store={configureStore()}>
     <BrowserRouter>
+      <GlobalStyle />
       <AppNavbar />
       <Switch>
         <Route exact path={Routes.home}>

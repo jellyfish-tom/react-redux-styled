@@ -53,13 +53,17 @@ function PostDetailsPage(props: {
     }
   };
 
-  return loading ? (
-    <FireworkSpinner size={30} color="#686769" loading={loading} />
-  ) : (
-    <div className="post-details">
-      <input onChange={onTitleChange} value={data.title || ''} />
-      <input onChange={onBodyChange} value={data.body || ''} />
-      <button onClick={saveChanges}>{data.id ? 'UPDATE' : 'CREATE'}</button>
+  return (
+    <div className="page post-details">
+      {loading ? (
+        <FireworkSpinner size={30} color="#686769" loading={loading} />
+      ) : (
+        <>
+          <input onChange={onTitleChange} value={data.title || ''} />
+          <input onChange={onBodyChange} value={data.body || ''} />
+          <button onClick={saveChanges}>{data.id ? 'UPDATE' : 'CREATE'}</button>
+        </>
+      )}
     </div>
   );
 }
