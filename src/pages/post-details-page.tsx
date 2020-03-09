@@ -2,6 +2,7 @@ import { connect, useSelector } from 'react-redux';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FireworkSpinner } from 'react-spinners-kit';
+import styled from 'styled-components';
 
 import { ErrorType } from '../actions/generics';
 import { StoreState } from '../reducers/root-reducer';
@@ -19,6 +20,31 @@ import * as postsAPI from '../api/posts';
 import Routes from '../api/routes';
 import StyledButton from '../components/button';
 import colors from '../components/colors';
+
+const StyledInput = styled.input`
+  font-size: 12px;
+  text-decoration: none;
+  padding: 3px 5px;
+  border: 2px solid #007bff;
+  display: inline-block;
+  margin-right: 10px;
+`;
+
+const StyledLabeledInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  justify-content: space-between;
+`;
+
+const StyledFormContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  button {
+    align-self: flex-end;
+  }
+`;
 
 function PostDetailsPage(props: {
   updatePost: UpdatePostType;
@@ -58,15 +84,21 @@ function PostDetailsPage(props: {
   return (
     <div className="page post-details">
       {loading ? (
-        <FireworkSpinner size={30} color="#686769" loading={loading} />
+        <FireworkSpinner size={30} color={colors.blue} loading={loading} />
       ) : (
-        <>
-          <input onChange={onTitleChange} value={data.title || ''} />
-          <input onChange={onBodyChange} value={data.body || ''} />
+        <StyledFormContainer>
+          <StyledLabeledInput>
+            <span>Post Title</span>
+            <StyledInput onChange={onTitleChange} value={data.title || ''} />
+          </StyledLabeledInput>
+          <StyledLabeledInput>
+            <span>Post Body</span>
+            <StyledInput onChange={onBodyChange} value={data.body || ''} />
+          </StyledLabeledInput>
           <StyledButton color={data.id ? colors.yellow : colors.green} clickHandler={saveChanges}>
             {data.id ? 'UPDATE' : 'CREATE'}
           </StyledButton>
-        </>
+        </StyledFormContainer>
       )}
     </div>
   );
