@@ -17,6 +17,8 @@ import {
 } from '../actions/post-actions';
 import * as postsAPI from '../api/posts';
 import Routes from '../api/routes';
+import StyledButton from '../components/button';
+import colors from '../components/colors';
 
 function PostDetailsPage(props: {
   updatePost: UpdatePostType;
@@ -61,7 +63,9 @@ function PostDetailsPage(props: {
         <>
           <input onChange={onTitleChange} value={data.title || ''} />
           <input onChange={onBodyChange} value={data.body || ''} />
-          <button onClick={saveChanges}>{data.id ? 'UPDATE' : 'CREATE'}</button>
+          <StyledButton color={data.id ? colors.yellow : colors.green} clickHandler={saveChanges}>
+            {data.id ? 'UPDATE' : 'CREATE'}
+          </StyledButton>
         </>
       )}
     </div>

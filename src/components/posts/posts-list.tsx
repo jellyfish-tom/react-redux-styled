@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Post } from '../../reducers/models';
 import PostListItem from './posts-list-item';
 import StyledButton from '../button';
-
 import colors from '../colors';
 
 const StyledHeaderContainer = styled.div`
